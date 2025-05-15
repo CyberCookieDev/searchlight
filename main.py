@@ -4,7 +4,7 @@ What is needed:
 - File search by filetype
 - Google something - done
 - Calculations - done
-- Quick to-do
+- Quick to-do done
 """
 import numexpr
 import webbrowser
@@ -51,6 +51,8 @@ def delete_task(number):
 
 def detect_command(data):
     x = []
+    z = data
+    z = z.split()
     for y in data:
         x.append(y)
     if x[0] == "?":
@@ -67,6 +69,21 @@ def detect_command(data):
          x.reverse()
          x = "".join(x)
          calculate(x)
+    if z[0] == "todo":
+        if z[1] == "add":
+            z.pop()
+            z.pop()
+            z = " ".join(z)
+            add_task(z)
+            show_tasks()
+        elif z[1] == "delete":
+            z.pop()
+            z.pop()
+            delete_task(int(z[0]))
+            show_tasks()
+        elif z[1] == "show":
+            show_tasks()
+    
 
-data = "+ 2 * 4 * (5+9) * (5-9)"
+data = "todo add eat breakfast at 10"
 detect_command(data)
